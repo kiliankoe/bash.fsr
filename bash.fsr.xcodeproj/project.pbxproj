@@ -15,6 +15,7 @@
 		395C23311BB77D5000DA6CDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395C232F1BB77D5000DA6CDB /* LaunchScreen.storyboard */; };
 		395C233C1BB77D5000DA6CDB /* bash_fsrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C233B1BB77D5000DA6CDB /* bash_fsrTests.swift */; };
 		395C23471BB77D5000DA6CDB /* bash_fsrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C23461BB77D5000DA6CDB /* bash_fsrUITests.swift */; };
+		395C23561BB77E8F00DA6CDB /* BashConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 395C23551BB77E8F00DA6CDB /* BashConfig.plist */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		395C23421BB77D5000DA6CDB /* bash.fsrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bash.fsrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		395C23461BB77D5000DA6CDB /* bash_fsrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bash_fsrUITests.swift; sourceTree = "<group>"; };
 		395C23481BB77D5000DA6CDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		395C23551BB77E8F00DA6CDB /* BashConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BashConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +105,7 @@
 				395C23261BB77D5000DA6CDB /* BashViewController.swift */,
 				395C23281BB77D5000DA6CDB /* QuoteViewController.swift */,
 				395C232A1BB77D5000DA6CDB /* Main.storyboard */,
-				395C232D1BB77D5000DA6CDB /* Assets.xcassets */,
-				395C232F1BB77D5000DA6CDB /* LaunchScreen.storyboard */,
-				395C23321BB77D5000DA6CDB /* Info.plist */,
+				395C23541BB77E7D00DA6CDB /* Supporting Files */,
 			);
 			path = bash.fsr;
 			sourceTree = "<group>";
@@ -126,6 +126,17 @@
 				395C23481BB77D5000DA6CDB /* Info.plist */,
 			);
 			path = bash.fsrUITests;
+			sourceTree = "<group>";
+		};
+		395C23541BB77E7D00DA6CDB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				395C232D1BB77D5000DA6CDB /* Assets.xcassets */,
+				395C232F1BB77D5000DA6CDB /* LaunchScreen.storyboard */,
+				395C23321BB77D5000DA6CDB /* Info.plist */,
+				395C23551BB77E8F00DA6CDB /* BashConfig.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 			files = (
 				395C23311BB77D5000DA6CDB /* LaunchScreen.storyboard in Resources */,
 				395C232E1BB77D5000DA6CDB /* Assets.xcassets in Resources */,
+				395C23561BB77E8F00DA6CDB /* BashConfig.plist in Resources */,
 				395C232C1BB77D5000DA6CDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
