@@ -17,6 +17,7 @@ class AddQuoteVC: UIViewController {
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addQuote")
 
+		automaticallyAdjustsScrollViewInsets = false
         textView?.becomeFirstResponder()
     }
 	

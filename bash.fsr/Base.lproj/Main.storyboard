@@ -131,8 +131,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-gm-cdr">
-                                <rect key="frame" x="20" y="72" width="560" height="508"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-gm-cdr">
+                                <rect key="frame" x="20" y="72" width="560" height="193"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -142,11 +142,23 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="Dpq-gm-cdr" secondAttribute="leading" id="2q7-vx-3x4"/>
-                            <constraint firstItem="Dpq-gm-cdr" firstAttribute="top" secondItem="FZQ-Uu-BsV" secondAttribute="bottom" constant="8" id="cLb-3X-WtT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Dpq-gm-cdr" secondAttribute="trailing" id="fXi-gW-g0G"/>
-                            <constraint firstItem="osz-v4-MbC" firstAttribute="top" secondItem="Dpq-gm-cdr" secondAttribute="bottom" constant="20" id="rWK-Hk-ew0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dpq-gm-cdr" secondAttribute="trailing" id="KbP-y1-gBq"/>
+                            <constraint firstItem="Dpq-gm-cdr" firstAttribute="top" secondItem="FZQ-Uu-BsV" secondAttribute="bottom" constant="8" id="Nn8-Ga-fHm"/>
+                            <constraint firstItem="Dpq-gm-cdr" firstAttribute="top" secondItem="FZQ-Uu-BsV" secondAttribute="bottom" constant="8" id="Ymn-89-Ydy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dpq-gm-cdr" secondAttribute="trailing" id="cs3-y9-vus"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Dpq-gm-cdr" secondAttribute="leading" id="gpl-yq-wwb"/>
+                            <constraint firstItem="osz-v4-MbC" firstAttribute="top" secondItem="Dpq-gm-cdr" secondAttribute="bottom" constant="335" id="jIX-ku-gQ6"/>
+                            <constraint firstItem="Dpq-gm-cdr" firstAttribute="centerY" secondItem="oVM-rc-yRv" secondAttribute="centerY" id="ojr-vb-HPS"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Dpq-gm-cdr" secondAttribute="leading" id="z8J-PE-n03"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KbP-y1-gBq"/>
+                                <exclude reference="Nn8-Ga-fHm"/>
+                                <exclude reference="ojr-vb-HPS"/>
+                                <exclude reference="z8J-PE-n03"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="textView" destination="Dpq-gm-cdr" id="71h-RG-Mpv"/>
