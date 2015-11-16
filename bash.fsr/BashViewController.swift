@@ -21,6 +21,9 @@ class BashViewController: UITableViewController {
 		let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "updateQuotes")
 		navigationItem.leftBarButtonItem = refreshButton
 		
+		self.refreshControl = UIRefreshControl()
+		self.refreshControl?.addTarget(self, action: "updateQuotes", forControlEvents: .ValueChanged)
+		
 		updateQuotes()
 	}
 
@@ -32,6 +35,7 @@ class BashViewController: UITableViewController {
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		quotes = Bash.getLatest()
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+		self.refreshControl?.endRefreshing()
 		tableView.reloadData()
 	}
 
@@ -67,5 +71,4 @@ class BashViewController: UITableViewController {
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
-
 }
