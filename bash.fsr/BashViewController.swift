@@ -85,16 +85,28 @@ class BashViewController: UITableViewController {
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 		let upvote = UITableViewRowAction(style: .Normal, title: "👍") { [unowned self] action, index in
 			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
-			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (_) -> Void in
-				self.updateQuotes()
+			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (result) -> Void in
+				if result {
+					self.updateQuotes()
+				} else {
+					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.Alert)
+					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+					self.presentViewController(alert, animated: true, completion: nil)
+				}
 			})
 		}
 		upvote.backgroundColor = UIColor.cyanColor()
 		
 		let downvote = UITableViewRowAction(style: .Normal, title: "👎") { [unowned self] (action, index) -> Void in
 			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
-			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (_) -> Void in
-				self.updateQuotes()
+			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (result) -> Void in
+				if result {
+					self.updateQuotes()
+				} else {
+					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.Alert)
+					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+					self.presentViewController(alert, animated: true, completion: nil)
+				}
 			})
 		}
 		downvote.backgroundColor = UIColor.grayColor()
