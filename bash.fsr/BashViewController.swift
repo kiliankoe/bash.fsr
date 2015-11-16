@@ -83,7 +83,7 @@ class BashViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-		let upvote = UITableViewRowAction(style: .Normal, title: "👍") { [unowned self] action, index in
+		let upvote = UITableViewRowAction(style: .Normal, title: " 👍 ") { [unowned self] action, index in
 			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
 			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (result) -> Void in
 				if result {
@@ -95,9 +95,9 @@ class BashViewController: UITableViewController {
 				}
 			})
 		}
-		upvote.backgroundColor = UIColor.cyanColor()
+		upvote.backgroundColor = UIColor(hex: 0x27AE60)
 		
-		let downvote = UITableViewRowAction(style: .Normal, title: "👎") { [unowned self] (action, index) -> Void in
+		let downvote = UITableViewRowAction(style: .Normal, title: " 👎 ") { [unowned self] (action, index) -> Void in
 			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
 			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (result) -> Void in
 				if result {
@@ -109,7 +109,7 @@ class BashViewController: UITableViewController {
 				}
 			})
 		}
-		downvote.backgroundColor = UIColor.grayColor()
+		downvote.backgroundColor = UIColor(hex: 0x7F8C8D)
 		
 		return [upvote, downvote]
 	}

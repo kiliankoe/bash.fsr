@@ -14,14 +14,14 @@ class QuoteCell: UITableViewCell {
 		didSet {
 			if let quote = quote {
 				idLabel?.text = "#\(quote.id)"
-				ratingLabel?.text = "\(quote.rating)"
+				ratingLabel?.text = quote.rating > 0 ? "+\(quote.rating)" : "\(quote.rating)"
 				quoteLabel?.text = quote.quote
 				
 				if quote.isAlreadyVoted {
-					backgroundColor = UIColor.whiteColor()
+					backgroundColor = UIColor(hex: 0xECF0F1)
 					mainTextColor = UIColor.blackColor()
 				} else {
-					backgroundColor = UIColor.darkGrayColor()
+					backgroundColor = UIColor(hex: 0x34495E)
 					mainTextColor = UIColor.whiteColor()
 				}
 			}
