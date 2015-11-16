@@ -29,13 +29,15 @@ class Bash {
 		
 		var latest_quotes = [Quote]()
 		
-		for quote in quotes! {
-			let id = quote.xPath("div[@class='quote_option-bar']/a").first?.content
-			let rating = quote.xPath("div[@class='quote_option-bar']/span[@class='quote_rating']/span").first?.content
-			let text = quote.xPath("div[@class='quote_quote']").first?.content?.trim()
-			
-			let quote = Quote(id: id!, rating: Int(rating!)!, quote: text!)
-			latest_quotes.append(quote)
+		if let quotes = quotes {
+			for quote in quotes {
+				let id = quote.xPath("div[@class='quote_option-bar']/a").first?.content
+				let rating = quote.xPath("div[@class='quote_option-bar']/span[@class='quote_rating']/span").first?.content
+				let text = quote.xPath("div[@class='quote_quote']").first?.content?.trim()
+				
+				let quote = Quote(id: id!, rating: Int(rating!)!, quote: text!)
+				latest_quotes.append(quote)
+			}
 		}
 		
 		return latest_quotes
