@@ -24,7 +24,7 @@ class QuoteViewController: UIViewController {
 		// Update the user interface for the detail item.
 		if let quote = self.detailItem {
 			detailDescriptionLabel?.text = quote.quote
-			navigationItem.title = quote.id
+			navigationItem.title = "#\(quote.id)"
 		}
 	}
 

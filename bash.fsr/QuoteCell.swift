@@ -13,17 +13,33 @@ class QuoteCell: UITableViewCell {
 	var quote: Quote? {
 		didSet {
 			if let quote = quote {
-				idLabel?.text = quote.id
+				idLabel?.text = "#\(quote.id)"
 				ratingLabel?.text = "\(quote.rating)"
 				quoteLabel?.text = quote.quote
+				
+				if quote.isAlreadyVoted {
+					backgroundColor = UIColor.whiteColor()
+					mainTextColor = UIColor.blackColor()
+				} else {
+					backgroundColor = UIColor.darkGrayColor()
+					mainTextColor = UIColor.whiteColor()
+				}
 			}
+		}
+	}
+	
+	var mainTextColor: UIColor? {
+		didSet {
+			idLabel?.textColor = mainTextColor
+			ratingLabel?.textColor = mainTextColor
+			quoteLabel?.textColor = mainTextColor
 		}
 	}
 	
 	@IBOutlet weak var idLabel: UILabel?
 	@IBOutlet weak var ratingLabel: UILabel?
 	@IBOutlet weak var quoteLabel: UILabel?
-
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -71,4 +71,34 @@ class BashViewController: UITableViewController {
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
+	
+	// MARK: - Swipe Stuff
+	
+	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return true
+	}
+	
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+	}
+	
+	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+		let upvote = UITableViewRowAction(style: .Normal, title: "👍") { [unowned self] action, index in
+			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
+			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (_) -> Void in
+				self.updateQuotes()
+			})
+		}
+		upvote.backgroundColor = UIColor.cyanColor()
+		
+		let downvote = UITableViewRowAction(style: .Normal, title: "👎") { [unowned self] (action, index) -> Void in
+			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
+			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (_) -> Void in
+				self.updateQuotes()
+			})
+		}
+		downvote.backgroundColor = UIColor.grayColor()
+		
+		return [upvote, downvote]
+	}
 }
