@@ -30,7 +30,8 @@ enum Vote: String {
 
 class Bash {
 	static func getLatest() -> [Quote] {
-		let document = Ji(contentsOfURL: BashConfig.URL, encoding: NSUTF8StringEncoding, isXML: false)
+		let url = NSURL(string: BashURL + "?latest")!
+		let document = Ji(contentsOfURL: url, encoding: NSUTF8StringEncoding, isXML: false)
 		let quotes = document?.xPath("//div[@class='quote_whole']")
 		
 		var latest_quotes = [Quote]()
@@ -61,7 +62,7 @@ class Bash {
 		let manager = Manager.sharedInstance
 		manager.session.configuration.HTTPAdditionalHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
 		let bodyParameters = ["rash_quote": quote]
-		manager.request(.POST, BashConfig.submitURL, parameters: bodyParameters).response { (req, res, _, _) -> Void in
+		manager.request(.POST, BashURL + "?add&submit", parameters: bodyParameters).response { (_, res, _, _) -> Void in
 			if res?.statusCode == 200 {
 				completion(true)
 			} else {
@@ -71,7 +72,8 @@ class Bash {
 	}
 	
 	static func voteQuote(id: Int, type: Vote, completion: (Bool -> Void)) {
-		Alamofire.request(.GET, BashConfig.voteURL(id, type: type)).response { (_, res, _, _) -> Void in
+		let url = BashURL + "/index.php?ajaxvote&\(id)&\(type.rawValue)"
+		Alamofire.request(.GET, url).response { (_, res, _, _) -> Void in
 			if res?.statusCode == 200 {
 				completion(true)
 			} else {

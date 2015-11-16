@@ -15,7 +15,7 @@ class AddQuoteVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addQuote")
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "addQuote")
 
 		automaticallyAdjustsScrollViewInsets = false
         textView?.becomeFirstResponder()
