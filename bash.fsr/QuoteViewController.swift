@@ -10,10 +10,10 @@ import UIKit
 
 class QuoteViewController: UIViewController {
 
-	@IBOutlet weak var detailDescriptionLabel: UILabel!
+	@IBOutlet weak var detailDescriptionLabel: UILabel?
 
 
-	var detailItem: AnyObject? {
+	var detailItem: Quote? {
 		didSet {
 		    // Update the view.
 		    self.configureView()
@@ -22,10 +22,9 @@ class QuoteViewController: UIViewController {
 
 	func configureView() {
 		// Update the user interface for the detail item.
-		if let detail = self.detailItem {
-		    if let label = self.detailDescriptionLabel {
-		        label.text = detail.description
-		    }
+		if let quote = self.detailItem {
+			detailDescriptionLabel?.text = quote.quote
+			navigationItem.title = quote.id
 		}
 	}
 
@@ -35,11 +34,4 @@ class QuoteViewController: UIViewController {
 		self.configureView()
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
-
 }
-
