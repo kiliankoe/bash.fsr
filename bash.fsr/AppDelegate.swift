@@ -12,8 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	
-	var showAddVC = false
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		return true
@@ -44,7 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
 		switch shortcutItem.type {
 		case "io.kilian.bash.fsr.add":
-			showAddVC = true
+			let mainVC = self.window?.rootViewController?.childViewControllers[0] as? BashViewController
+			mainVC?.performSegueWithIdentifier("showAddQuote", sender: nil)
 			completionHandler(true)
 		default:
 			completionHandler(false)

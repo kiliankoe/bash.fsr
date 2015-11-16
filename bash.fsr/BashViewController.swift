@@ -21,12 +21,6 @@ class BashViewController: UITableViewController {
 		let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "updateQuotes")
 		navigationItem.leftBarButtonItem = refreshButton
 		
-		let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-		if appDelegate.showAddVC {
-			performSegueWithIdentifier("showAddQuote", sender: nil)
-			appDelegate.showAddVC = false
-		}
-		
 		updateQuotes()
 	}
 
