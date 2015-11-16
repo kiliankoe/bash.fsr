@@ -17,6 +17,7 @@
 		395C23471BB77D5000DA6CDB /* bash_fsrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C23461BB77D5000DA6CDB /* bash_fsrUITests.swift */; };
 		395C23581BB77F4900DA6CDB /* BashConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C23571BB77F4900DA6CDB /* BashConfig.swift */; };
 		3960C5381BF9FABE00515B9E /* AddQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */; };
+		398DDA4B1BFA312C0057240F /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398DDA4A1BFA312C0057240F /* QuoteCell.swift */; };
 		39DEE1681BB8B99900435899 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DEE1671BB8B99900435899 /* Alamofire.framework */; };
 		39DEE16A1BB8B99C00435899 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DEE1691BB8B99C00435899 /* Ji.framework */; };
 		39DEE16C1BB8BA7000435899 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DEE16B1BB8BA7000435899 /* Bash.swift */; };
@@ -56,6 +57,7 @@
 		395C23481BB77D5000DA6CDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		395C23571BB77F4900DA6CDB /* BashConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashConfig.swift; sourceTree = "<group>"; };
 		3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteVC.swift; sourceTree = "<group>"; };
+		398DDA4A1BFA312C0057240F /* QuoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		39DEE1671BB8B99900435899 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		39DEE1691BB8B99C00435899 /* Ji.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ji.framework; path = ../Carthage/Build/iOS/Ji.framework; sourceTree = "<group>"; };
 		39DEE16B1BB8BA7000435899 /* Bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				395C23261BB77D5000DA6CDB /* BashViewController.swift */,
 				395C23281BB77D5000DA6CDB /* QuoteViewController.swift */,
 				3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */,
+				398DDA4A1BFA312C0057240F /* QuoteCell.swift */,
 				395C232A1BB77D5000DA6CDB /* Main.storyboard */,
 				395C23541BB77E7D00DA6CDB /* Supporting Files */,
 			);
@@ -316,6 +319,7 @@
 				3960C5381BF9FABE00515B9E /* AddQuoteVC.swift in Sources */,
 				395C23271BB77D5000DA6CDB /* BashViewController.swift in Sources */,
 				39DEE16C1BB8BA7000435899 /* Bash.swift in Sources */,
+				398DDA4B1BFA312C0057240F /* QuoteCell.swift in Sources */,
 				395C23251BB77D5000DA6CDB /* AppDelegate.swift in Sources */,
 				395C23581BB77F4900DA6CDB /* BashConfig.swift in Sources */,
 			);

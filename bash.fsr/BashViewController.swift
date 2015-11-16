@@ -58,11 +58,9 @@ class BashViewController: UITableViewController {
 	}
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
+		let cell = tableView.dequeueReusableCellWithIdentifier("QuoteCell", forIndexPath: indexPath) as! QuoteCell
 		let quote = quotes[indexPath.row]
-		cell.textLabel!.text = quote.quote
-		cell.detailTextLabel?.text = "\(quote.rating)"
+		cell.quote = quote
 		return cell
 	}
 	
