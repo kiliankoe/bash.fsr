@@ -22,11 +22,13 @@ class AddQuoteVC: UIViewController {
     }
 	
 	func addQuote() {
+        self.navigationItem.rightBarButtonItem!.action = nil
 		let quote = textView?.text
 		guard quote != "" else {
 			let alert = UIAlertController(title: "Nop", message: "Quote is empty! Try again...", preferredStyle: UIAlertControllerStyle.Alert)
 			alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
 			self.presentViewController(alert, animated: true, completion: nil)
+            self.navigationItem.rightBarButtonItem?.action = Selector("addQuote")
 			return
 		}
 		Bash.addQuote(quote!) { [unowned self] (success) -> Void in
@@ -41,6 +43,7 @@ class AddQuoteVC: UIViewController {
 				self.presentViewController(alert, animated: true, completion: nil)
 			}
 		}
+        self.navigationItem.rightBarButtonItem?.action = Selector("addQuote")
 	}
 
 }
