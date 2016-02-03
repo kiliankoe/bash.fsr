@@ -12,6 +12,9 @@ class AddQuoteVC: UIViewController {
 
 	@IBOutlet weak var textView: UITextView?
 	
+	var activityButton: UIBarButtonItem?
+    	var doneButton: UIBarButtonItem?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
