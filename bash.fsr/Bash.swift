@@ -9,12 +9,6 @@
 import UIKit
 import Ji
 
-extension String {
-	func trim() -> String {
-		return self.trimmingCharacters(in: .whitespacesAndNewlines)
-	}
-}
-
 struct Quote {
 	let id: Int
 	let rating: Int
@@ -27,34 +21,50 @@ enum Vote: String {
 	case Down = "minus"
 }
 
-class Bash {
-	static func getLatest() -> [Quote] {
-		let url = URL(string: BashURL + "?latest")!
-		let document = Ji(contentsOfURL: url, encoding: String.Encoding.utf8, isXML: false) // FIXME: Ugh, synchronous >.<
-		let quotes = document?.xPath("//div[@class='quote_whole']")
-		
-		var latest_quotes = [Quote]()
-		
-		if let quotes = quotes {
-			for quote in quotes {
-                let id = Int((quote.xPath("div[@class='quote_option-bar']/a").first?.content?.replacingOccurrences(of: "#", with: ""))!)
-				let rating = quote.xPath("div[@class='quote_option-bar']/span[@class='quote_rating']/span").first?.content
-				let text = quote.xPath("div[@class='quote_quote']").first?.content?.trim()
-				
-				var isAlreadyVoted: Bool
-				if quote.xPath("div[@class='quote_option-bar']/span[@class='quote_plus']/@title").first?.content == "You have already voted this quote" {
-					isAlreadyVoted = true
-				} else {
-					isAlreadyVoted = false
-				}
-				
-				let quote = Quote(id: id!, rating: Int(rating!)!, quote: text!, isAlreadyVoted: isAlreadyVoted)
-				latest_quotes.append(quote)
-			}
-		}
-		
-		return latest_quotes
-	}
+enum Bash {
+    static func getLatest(completion: @escaping ([Quote]?) -> Void) {
+        let url = URL(string: BashURL + "?latest")!
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                error == nil,
+                let res = response as? HTTPURLResponse,
+                res.statusCode == 200,
+                let data = data
+            else {
+                completion(nil)
+                return
+            }
+
+            let document = Ji(htmlData: data, encoding: .utf8)
+            guard let quotes = document?.xPath("//div[@class='quote_whole']") else {
+                completion(nil)
+                return
+            }
+
+            let latest = quotes.flatMap { quote -> Quote? in
+                guard
+                    let idStr = quote.xPath("div[@class='quote_option-bar']/a").first?.content?.replacingOccurrences(of: "#", with: ""),
+                    let id = Int(idStr),
+                    let ratingStr = quote.xPath("div[@class='quote_option-bar']/span[@class='quote_rating']/span").first?.content,
+                    let rating = Int(ratingStr),
+                    let text = quote.xPath("div[@class='quote_quote']").first?.content?.trimmingCharacters(in: .whitespacesAndNewlines)
+                else {
+                    return nil
+                }
+
+                var isAlreadyVoted: Bool
+                if quote.xPath("div[@class='quote_option-bar']/span[@class='quote_plus']/@title").first?.content == "You have already voted this quote" {
+                    isAlreadyVoted = true
+                } else {
+                    isAlreadyVoted = false
+                }
+                
+                return Quote(id: id, rating: rating, quote: text, isAlreadyVoted: isAlreadyVoted)
+            }
+
+            completion(latest)
+        }.resume()
+    }
 	
 	
 	static func addQuote(_ quote: String, completion: @escaping (Bool) -> Void) {

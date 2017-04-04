@@ -32,11 +32,19 @@ class BashViewController: UITableViewController {
 	}
 	
 	func updateQuotes() {
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		quotes = Bash.getLatest()
-		UIApplication.shared.isNetworkActivityIndicatorVisible = false
-		self.refreshControl?.endRefreshing()
-		tableView.reloadData()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
+        Bash.getLatest { [weak self] quotes in
+            OperationQueue.main.addOperation {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self?.refreshControl?.endRefreshing()
+
+                guard let quotes = quotes else { return }
+
+                self?.quotes = quotes
+                self?.tableView.reloadData()
+            }
+        }
 	}
 
 	// MARK: - Segues
