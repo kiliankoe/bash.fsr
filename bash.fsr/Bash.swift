@@ -12,7 +12,7 @@ import Ji
 
 extension String {
 	func trim() -> String {
-		return self.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+		return self.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 }
 
@@ -30,15 +30,15 @@ enum Vote: String {
 
 class Bash {
 	static func getLatest() -> [Quote] {
-		let url = NSURL(string: BashURL + "?latest")!
-		let document = Ji(contentsOfURL: url, encoding: NSUTF8StringEncoding, isXML: false)
+		let url = URL(string: BashURL + "?latest")!
+		let document = Ji(contentsOfURL: url, encoding: String.Encoding.utf8, isXML: false) // FIXME: Ugh, synchronous >.<
 		let quotes = document?.xPath("//div[@class='quote_whole']")
 		
 		var latest_quotes = [Quote]()
 		
 		if let quotes = quotes {
 			for quote in quotes {
-				let id = Int((quote.xPath("div[@class='quote_option-bar']/a").first?.content?.stringByReplacingOccurrencesOfString("#", withString: ""))!)
+                let id = Int((quote.xPath("div[@class='quote_option-bar']/a").first?.content?.replacingOccurrences(of: "#", with: ""))!)
 				let rating = quote.xPath("div[@class='quote_option-bar']/span[@class='quote_rating']/span").first?.content
 				let text = quote.xPath("div[@class='quote_quote']").first?.content?.trim()
 				

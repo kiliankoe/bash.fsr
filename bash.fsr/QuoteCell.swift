@@ -19,10 +19,10 @@ class QuoteCell: UITableViewCell {
 				
 				if quote.isAlreadyVoted {
 					backgroundColor = UIColor(hex: 0xECF0F1)
-					mainTextColor = UIColor.blackColor()
+					mainTextColor = UIColor.black
 				} else {
 					backgroundColor = UIColor(hex: 0x34495E)
-					mainTextColor = UIColor.whiteColor()
+					mainTextColor = UIColor.white
 				}
 			}
 		}
@@ -45,7 +45,7 @@ class QuoteCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

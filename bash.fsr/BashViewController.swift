@@ -15,37 +15,37 @@ class BashViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addQuote")
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: "addQuote")
 		navigationItem.rightBarButtonItem = addButton
 		
-		let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "updateQuotes")
+		let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: "updateQuotes")
 		navigationItem.leftBarButtonItem = refreshButton
 		
 		self.refreshControl = UIRefreshControl()
-		self.refreshControl?.addTarget(self, action: "updateQuotes", forControlEvents: .ValueChanged)
+		self.refreshControl?.addTarget(self, action: "updateQuotes", for: .valueChanged)
 		
 		updateQuotes()
 	}
 
 	func addQuote() {
-		performSegueWithIdentifier("showAddQuote", sender: nil)
+		performSegue(withIdentifier: "showAddQuote", sender: nil)
 	}
 	
 	func updateQuotes() {
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		quotes = Bash.getLatest()
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 		self.refreshControl?.endRefreshing()
 		tableView.reloadData()
 	}
 
 	// MARK: - Segues
 
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = self.tableView.indexPathForSelectedRow {
 		        let quote = quotes[indexPath.row]
-				let dest = segue.destinationViewController as! QuoteViewController
+				let dest = segue.destination as! QuoteViewController
 				dest.detailItem = quote
 		    }
 		}
@@ -53,59 +53,59 @@ class BashViewController: UITableViewController {
 
 	// MARK: - Table View
 
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return quotes.count
 	}
 
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("QuoteCell", forIndexPath: indexPath) as! QuoteCell
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteCell
 		let quote = quotes[indexPath.row]
 		cell.quote = quote
 		return cell
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
 	// MARK: - Swipe Stuff
 	
-	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		
 	}
 	
-	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-		let upvote = UITableViewRowAction(style: .Normal, title: " 👍 ") { [unowned self] action, index in
-			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
+	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let upvote = UITableViewRowAction(style: .normal, title: " 👍 ") { [unowned self] action, index in
+			let quote = (self.tableView.cellForRow(at: indexPath) as! QuoteCell).quote!
 			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (result) -> Void in
 				if result {
 					self.updateQuotes()
 				} else {
-					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.Alert)
-					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-					self.presentViewController(alert, animated: true, completion: nil)
+					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+					self.present(alert, animated: true, completion: nil)
 				}
 			})
 		}
 		upvote.backgroundColor = UIColor(hex: 0x27AE60)
 		
-		let downvote = UITableViewRowAction(style: .Normal, title: " 👎 ") { [unowned self] (action, index) -> Void in
-			let quote = (self.tableView.cellForRowAtIndexPath(indexPath) as! QuoteCell).quote!
+		let downvote = UITableViewRowAction(style: .normal, title: " 👎 ") { [unowned self] (action, index) -> Void in
+			let quote = (self.tableView.cellForRow(at: indexPath) as! QuoteCell).quote!
 			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (result) -> Void in
 				if result {
 					self.updateQuotes()
 				} else {
-					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.Alert)
-					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-					self.presentViewController(alert, animated: true, completion: nil)
+					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+					self.present(alert, animated: true, completion: nil)
 				}
 			})
 		}
