@@ -15,14 +15,14 @@ class BashViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: "addQuote")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuote))
 		navigationItem.rightBarButtonItem = addButton
 		
-		let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: "updateQuotes")
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateQuotes))
 		navigationItem.leftBarButtonItem = refreshButton
 		
 		self.refreshControl = UIRefreshControl()
-		self.refreshControl?.addTarget(self, action: "updateQuotes", for: .valueChanged)
+		self.refreshControl?.addTarget(self, action: #selector(updateQuotes), for: .valueChanged)
 		
 		updateQuotes()
 	}

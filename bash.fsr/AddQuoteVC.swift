@@ -22,7 +22,7 @@ class AddQuoteVC: UIViewController {
         activityIndicator.color = UIColor.black
         activityIndicator.startAnimating()
         activityButton = UIBarButtonItem(customView: activityIndicator)
-        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: "addQuote")
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(AddQuoteVC.addQuote))
         
         navigationItem.rightBarButtonItem = doneButton
 
