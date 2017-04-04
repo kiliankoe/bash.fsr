@@ -18,11 +18,11 @@ class AddQuoteVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-        let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
-        activityIndicator.color = UIColor.blackColor()
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        activityIndicator.color = UIColor.black
         activityIndicator.startAnimating()
         activityButton = UIBarButtonItem(customView: activityIndicator)
-        doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "addQuote")
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: "addQuote")
         
         navigationItem.rightBarButtonItem = doneButton
 

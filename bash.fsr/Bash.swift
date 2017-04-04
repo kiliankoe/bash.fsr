@@ -58,7 +58,7 @@ class Bash {
 	}
 	
 	
-	static func addQuote(quote: String, completion: (Bool -> Void)) {
+	static func addQuote(_ quote: String, completion: ((Bool) -> Void)) {
 		let manager = Manager.sharedInstance
 		manager.session.configuration.HTTPAdditionalHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
 		let bodyParameters = ["rash_quote": quote]
@@ -71,7 +71,7 @@ class Bash {
 		}
 	}
 	
-	static func voteQuote(id: Int, type: Vote, completion: (Bool -> Void)) {
+	static func voteQuote(_ id: Int, type: Vote, completion: ((Bool) -> Void)) {
 		let url = BashURL + "/index.php?ajaxvote&\(id)&\(type.rawValue)"
 		Alamofire.request(.GET, url).response { (_, res, _, _) -> Void in
 			if res?.statusCode == 200 {
