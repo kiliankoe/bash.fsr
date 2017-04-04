@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import Ji
 
 extension String {
@@ -58,27 +57,49 @@ class Bash {
 	}
 	
 	
-	static func addQuote(_ quote: String, completion: ((Bool) -> Void)) {
-		let manager = Manager.sharedInstance
-		manager.session.configuration.HTTPAdditionalHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
-		let bodyParameters = ["rash_quote": quote]
-		manager.request(.POST, BashURL + "?add&submit", parameters: bodyParameters).response { (_, res, _, _) -> Void in
-			if res?.statusCode == 200 {
-				completion(true)
-			} else {
-				completion(false)
-			}
-		}
+	static func addQuote(_ quote: String, completion: @escaping (Bool) -> Void) {
+        var request = URLRequest(url: URL(string: BashURL + "?add&submit")!)
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+
+        let params = ["rash_quote": quote]
+        guard let body = try? JSONSerialization.data(withJSONObject: params) else { // TODO: Check if this works
+            completion(false)
+            return
+        }
+        request.httpBody = body
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            guard
+                error == nil,
+                let res = response as? HTTPURLResponse,
+                res.statusCode == 200
+            else {
+                completion(false)
+                return
+            }
+
+            completion(true)
+        }.resume()
 	}
 	
-	static func voteQuote(_ id: Int, type: Vote, completion: ((Bool) -> Void)) {
-		let url = BashURL + "/index.php?ajaxvote&\(id)&\(type.rawValue)"
-		Alamofire.request(.GET, url).response { (_, res, _, _) -> Void in
-			if res?.statusCode == 200 {
-				completion(true)
-			} else {
-				completion(false)
-			}
-		}
+    static func voteQuote(_ id: Int, type: Vote, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: BashURL + "/index.php?ajaxvote&\(id)&\(type.rawValue)") else {
+            completion(false)
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { _, response, error in
+            guard
+                error == nil,
+                let res = response as? HTTPURLResponse,
+                res.statusCode == 200
+            else {
+                completion(false)
+                return
+            }
+
+            completion(true)
+        }.resume()
 	}
 }
