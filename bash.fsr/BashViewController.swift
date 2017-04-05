@@ -16,10 +16,10 @@ class BashViewController: UITableViewController {
 		super.viewDidLoad()
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuote))
-		navigationItem.rightBarButtonItem = addButton
+		self.navigationItem.rightBarButtonItem = addButton
 		
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateQuotes))
-		navigationItem.leftBarButtonItem = refreshButton
+		self.navigationItem.leftBarButtonItem = refreshButton
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl?.addTarget(self, action: #selector(updateQuotes), for: .valueChanged)
@@ -53,24 +53,20 @@ class BashViewController: UITableViewController {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = self.tableView.indexPathForSelectedRow {
 		        let quote = quotes[indexPath.row]
-				let dest = segue.destination as! QuoteViewController
-				dest.quote = quote
+				let dest = segue.destination as? QuoteViewController
+				dest?.quote = quote
 		    }
 		}
 	}
 
 	// MARK: - Table View
 
-	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
-
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return quotes.count
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: QuoteCell.self), for: indexPath) as? QuoteCell ?? QuoteCell()
 		let quote = quotes[indexPath.row]
 		cell.quote = quote
 		return cell
@@ -91,29 +87,29 @@ class BashViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let upvote = UITableViewRowAction(style: .normal, title: " 👍 ") { [unowned self] action, index in
-			let quote = (self.tableView.cellForRow(at: indexPath) as! QuoteCell).quote!
-			Bash.voteQuote(quote.id, type: .Up, completion: { [unowned self] (result) -> Void in
+        let quote = self.quotes[indexPath.row]
+
+		let upvote = UITableViewRowAction(style: .normal, title: " 👍 ") { [weak self] _, _ in
+			Bash.voteQuote(quote.id, type: .up, completion: { result in
 				if result {
-					self.updateQuotes()
+					self?.updateQuotes()
 				} else {
-					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
-					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-					self.present(alert, animated: true, completion: nil)
+					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+					self?.present(alert, animated: true, completion: nil)
 				}
 			})
 		}
 		upvote.backgroundColor = UIColor(hex: 0x27AE60)
 		
-		let downvote = UITableViewRowAction(style: .normal, title: " 👎 ") { [unowned self] (action, index) -> Void in
-			let quote = (self.tableView.cellForRow(at: indexPath) as! QuoteCell).quote!
-			Bash.voteQuote(quote.id, type: .Down, completion: { [unowned self] (result) -> Void in
+		let downvote = UITableViewRowAction(style: .normal, title: " 👎 ") { [weak self] _, _ in
+			Bash.voteQuote(quote.id, type: .down, completion: { result in
 				if result {
-					self.updateQuotes()
+					self?.updateQuotes()
 				} else {
-					let alert = UIAlertController(title: "Nop", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
-					alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-					self.present(alert, animated: true, completion: nil)
+					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+					self?.present(alert, animated: true, completion: nil)
 				}
 			})
 		}

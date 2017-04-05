@@ -17,8 +17,8 @@ struct Quote {
 }
 
 enum Vote: String {
-	case Up = "plus"
-	case Down = "minus"
+	case up = "plus"
+	case down = "minus"
 }
 
 enum Bash {
