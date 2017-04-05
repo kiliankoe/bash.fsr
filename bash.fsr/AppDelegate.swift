@@ -66,10 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         pushtoken = tokenString
-        print("Device Token: \(tokenString)")
+//        print("Device Token: \(tokenString)")
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register:", error)
+//        print("Failed to register:", error)
     }
 }
