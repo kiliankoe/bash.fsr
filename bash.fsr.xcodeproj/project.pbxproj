@@ -15,6 +15,7 @@
 		395C23311BB77D5000DA6CDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395C232F1BB77D5000DA6CDB /* LaunchScreen.storyboard */; };
 		395C23581BB77F4900DA6CDB /* BashConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C23571BB77F4900DA6CDB /* BashConfig.swift */; };
 		3960C5381BF9FABE00515B9E /* AddQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */; };
+		39724F561E95845A000E7F6D /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39724F551E95845A000E7F6D /* Vote.swift */; };
 		3976A4B01BFA896A008880E7 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3976A4AF1BFA896A008880E7 /* SwiftColors.swift */; };
 		398DDA4B1BFA312C0057240F /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398DDA4A1BFA312C0057240F /* QuoteCell.swift */; };
 		39DEE16A1BB8B99C00435899 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DEE1691BB8B99C00435899 /* Ji.framework */; };
@@ -33,6 +34,7 @@
 		395C23571BB77F4900DA6CDB /* BashConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashConfig.swift; sourceTree = "<group>"; };
 		3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteVC.swift; sourceTree = "<group>"; };
 		39724F541E94D511000E7F6D /* bash.fsr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bash.fsr.entitlements; sourceTree = "<group>"; };
+		39724F551E95845A000E7F6D /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		3976A4AF1BFA896A008880E7 /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		398DDA4A1BFA312C0057240F /* QuoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		39DEE1691BB8B99C00435899 /* Ji.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ji.framework; path = ../Carthage/Build/iOS/Ji.framework; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				39724F541E94D511000E7F6D /* bash.fsr.entitlements */,
 				395C23241BB77D5000DA6CDB /* AppDelegate.swift */,
 				39DEE16B1BB8BA7000435899 /* Bash.swift */,
+				39724F551E95845A000E7F6D /* Vote.swift */,
 				395C23261BB77D5000DA6CDB /* BashViewController.swift */,
 				395C23281BB77D5000DA6CDB /* QuoteViewController.swift */,
 				3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */,
@@ -208,6 +211,7 @@
 				39DEE16C1BB8BA7000435899 /* Bash.swift in Sources */,
 				398DDA4B1BFA312C0057240F /* QuoteCell.swift in Sources */,
 				395C23251BB77D5000DA6CDB /* AppDelegate.swift in Sources */,
+				39724F561E95845A000E7F6D /* Vote.swift in Sources */,
 				395C23581BB77F4900DA6CDB /* BashConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,11 +16,6 @@ struct Quote {
 	let isAlreadyVoted: Bool
 }
 
-enum Vote: String {
-	case up = "plus"
-	case down = "minus"
-}
-
 enum Bash {
     static func getLatest(completion: @escaping ([Quote]?) -> Void) {
         let url = URL(string: BashURL + "?latest")!
@@ -99,7 +94,12 @@ enum Bash {
             return
         }
 
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
         URLSession.shared.dataTask(with: url) { _, response, error in
+
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
             guard
                 error == nil,
                 let res = response as? HTTPURLResponse,
