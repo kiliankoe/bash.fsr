@@ -18,11 +18,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		UINavigationBar.appearance().tintColor = UIColor(hex: 0x2C3E50)
 
-        let notificationSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
+        let upvoteAction = UIMutableUserNotificationAction()
+        upvoteAction.identifier = Vote.up.rawValue
+        upvoteAction.title = "👍"
+        upvoteAction.activationMode = .background
+
+        let downvoteAction = UIMutableUserNotificationAction()
+        downvoteAction.identifier = Vote.down.rawValue
+        downvoteAction.title = "👎"
+        downvoteAction.activationMode = .background
+
+        let quoteCategory = UIMutableUserNotificationCategory()
+        quoteCategory.identifier = "quote_category"
+        quoteCategory.setActions([upvoteAction, downvoteAction], for: .default)
+
+        let notificationSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: [quoteCategory])
         application.registerUserNotificationSettings(notificationSettings)
 
 		return true
 	}
+
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
+        defer { completionHandler() }
+
+        guard
+            let identifier = identifier,
+            let voteAction = Vote(rawValue: identifier),
+            let voteIdStr = userInfo["quote_id"] as? String,
+            let voteId = Int(voteIdStr)
+        else { return }
+
+        Bash.voteQuote(voteId, type: voteAction) { _ in
+            application.applicationIconBadgeNumber = 0
+        }
+    }
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
