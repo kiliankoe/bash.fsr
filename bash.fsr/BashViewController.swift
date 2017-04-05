@@ -20,12 +20,26 @@ class BashViewController: UITableViewController {
 		
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateQuotes))
 		self.navigationItem.leftBarButtonItem = refreshButton
+
+        let titleButton = UIButton()
+        titleButton.titleLabel?.text = "bash.fsr"
+        titleButton.setTitle("bash.fsr", for: .normal)
+        titleButton.setTitleColor(.black, for: .normal)
+        titleButton.setTitleShadowColor(.black, for: .normal)
+        titleButton.addTarget(self, action: #selector(onTitleButtonTap), for: .touchUpInside)
+        self.navigationItem.titleView = titleButton
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl?.addTarget(self, action: #selector(updateQuotes), for: .valueChanged)
 		
 		updateQuotes()
 	}
+
+    func onTitleButtonTap() {
+        let sharingItems: [Any] = [pushtoken]
+        let activityController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
+    }
 
 	func addQuote() {
 		performSegue(withIdentifier: "showAddQuote", sender: nil)

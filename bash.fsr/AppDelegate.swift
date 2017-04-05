@@ -8,6 +8,8 @@
 
 import UIKit
 
+var pushtoken = "unknown"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -59,5 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if notificationSettings.types != .none {
             application.registerForRemoteNotifications()
         }
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        pushtoken = tokenString
+        print("Device Token: \(tokenString)")
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register:", error)
     }
 }
