@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
-        defer { completionHandler() }
-
         guard
             let identifier = identifier,
             let voteAction = Vote(rawValue: identifier),
@@ -50,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Bash.voteQuote(voteId, type: voteAction) { _ in
             application.applicationIconBadgeNumber = 0
+
+            completionHandler()
         }
     }
 
