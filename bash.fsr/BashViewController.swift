@@ -90,6 +90,13 @@ class BashViewController: UITableViewController {
         let quote = self.quotes[indexPath.row]
 
 		let upvote = UITableViewRowAction(style: .normal, title: " 👍 ") { [weak self] _, _ in
+            guard !quote.isAlreadyVoted else {
+                let alert = UIAlertController(title: "Nope", message: "You already voted this one, chill!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+
 			Bash.voteQuote(quote.id, type: .up, completion: { result in
 				if result {
 					self?.updateQuotes()
@@ -103,6 +110,13 @@ class BashViewController: UITableViewController {
 		upvote.backgroundColor = UIColor(hex: 0x27AE60)
 		
 		let downvote = UITableViewRowAction(style: .normal, title: " 👎 ") { [weak self] _, _ in
+            guard !quote.isAlreadyVoted else {
+                let alert = UIAlertController(title: "Nope", message: "You already voted this one, chill!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+
 			Bash.voteQuote(quote.id, type: .down, completion: { result in
 				if result {
 					self?.updateQuotes()
