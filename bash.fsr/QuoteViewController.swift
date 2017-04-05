@@ -12,17 +12,14 @@ class QuoteViewController: UIViewController {
 
 	@IBOutlet weak var detailDescriptionLabel: UILabel?
 
-
-	var detailItem: Quote? {
+	var quote: Quote? {
 		didSet {
-		    // Update the view.
 		    self.configureView()
 		}
 	}
 
 	func configureView() {
-		// Update the user interface for the detail item.
-		if let quote = self.detailItem {
+		if let quote = self.quote {
 			detailDescriptionLabel?.text = quote.quote
 			navigationItem.title = "#\(quote.id)"
 		}
@@ -30,8 +27,6 @@ class QuoteViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 		self.configureView()
 	}
-
 }

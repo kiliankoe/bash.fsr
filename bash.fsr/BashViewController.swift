@@ -54,7 +54,7 @@ class BashViewController: UITableViewController {
 		    if let indexPath = self.tableView.indexPathForSelectedRow {
 		        let quote = quotes[indexPath.row]
 				let dest = segue.destination as! QuoteViewController
-				dest.detailItem = quote
+				dest.quote = quote
 		    }
 		}
 	}
