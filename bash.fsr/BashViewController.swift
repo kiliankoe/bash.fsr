@@ -11,6 +11,9 @@ import UIKit
 class BashViewController: UITableViewController {
 
 	var quotes = [Quote]()
+    var showLatest = true
+
+    @IBOutlet weak var titleButton: UIButton!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -18,24 +21,29 @@ class BashViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuote))
 		self.navigationItem.rightBarButtonItem = addButton
 		
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateQuotes))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(toggleQuoteSource))
 		self.navigationItem.leftBarButtonItem = refreshButton
 
-        let titleButton = UIButton()
-        titleButton.titleLabel?.text = "bash.fsr"
-        titleButton.setTitle("bash.fsr", for: .normal)
-        titleButton.setTitleColor(.black, for: .normal)
-        titleButton.setTitleShadowColor(.black, for: .normal)
-        titleButton.addTarget(self, action: #selector(onTitleButtonTap), for: .touchUpInside)
-        self.navigationItem.titleView = titleButton
-		
+        self.updateTitleButton()
+
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl?.addTarget(self, action: #selector(updateQuotes), for: .valueChanged)
 		
 		updateQuotes()
 	}
 
-    func onTitleButtonTap() {
+    func toggleQuoteSource() {
+        self.showLatest = !self.showLatest
+        self.updateTitleButton()
+        self.updateQuotes()
+    }
+
+    func updateTitleButton() {
+        let title = showLatest ? "Latest" : "Random"
+        self.titleButton.setTitle(title, for: .normal)
+    }
+
+    @IBAction func onTitleButtonTap(_ sender: UIButton) {
         let sharingItems: [Any] = [pushtoken]
         let activityController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
@@ -48,7 +56,7 @@ class BashViewController: UITableViewController {
 	func updateQuotes() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
-        Bash.getLatest { [weak self] quotes in
+        Bash.get(latest: showLatest) { [weak self] quotes in
             OperationQueue.main.addOperation {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self?.refreshControl?.endRefreshing()

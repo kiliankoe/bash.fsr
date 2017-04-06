@@ -17,8 +17,9 @@ struct Quote {
 }
 
 enum Bash {
-    static func getLatest(completion: @escaping ([Quote]?) -> Void) {
-        let url = URL(string: BashURL + "?latest")!
+    static func get(latest: Bool, completion: @escaping ([Quote]?) -> Void) {
+        let ext = latest ? "?latest" : "?random"
+        let url = URL(string: BashURL + ext)!
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
                 error == nil,
