@@ -21,10 +21,11 @@ class BashViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuote))
 		self.navigationItem.rightBarButtonItem = addButton
 		
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(toggleQuoteSource))
-		self.navigationItem.leftBarButtonItem = refreshButton
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareToken))
+		self.navigationItem.leftBarButtonItem = shareButton
 
-        self.updateTitleButton()
+        let title = showLatest ? "Latest" : "Random"
+        self.titleButton.setTitle(title, for: .normal)
 
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl?.addTarget(self, action: #selector(updateQuotes), for: .valueChanged)
@@ -32,21 +33,17 @@ class BashViewController: UITableViewController {
 		updateQuotes()
 	}
 
-    func toggleQuoteSource() {
-        self.showLatest = !self.showLatest
-        self.updateTitleButton()
-        self.updateQuotes()
-    }
-
-    func updateTitleButton() {
-        let title = showLatest ? "Latest" : "Random"
-        self.titleButton.setTitle(title, for: .normal)
-    }
-
-    @IBAction func onTitleButtonTap(_ sender: UIButton) {
+    func shareToken() {
         let sharingItems: [Any] = [pushtoken]
         let activityController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
+    }
+
+    @IBAction func onTitleButtonTap(_ sender: UIButton) {
+        self.showLatest = !self.showLatest
+        let title = showLatest ? "Latest" : "Random"
+        self.titleButton.setTitle(title, for: .normal)
+        self.updateQuotes()
     }
 
 	func addQuote() {
