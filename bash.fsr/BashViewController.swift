@@ -118,7 +118,12 @@ class BashViewController: UITableViewController {
 
 			Bash.voteQuote(quote.id, type: .up, completion: { result in
 				if result {
-					self?.updateQuotes()
+                    let newQuote = Quote(id: quote.id, rating: quote.rating + 1, quote: quote.quote, isAlreadyVoted: true)
+                    self?.quotes.remove(at: indexPath.row)
+                    self?.quotes.insert(newQuote, at: indexPath.row)
+                    OperationQueue.main.addOperation {
+                        self?.tableView.reloadData()
+                    }
 				} else {
 					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
 					alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
@@ -138,7 +143,12 @@ class BashViewController: UITableViewController {
 
 			Bash.voteQuote(quote.id, type: .down, completion: { result in
 				if result {
-					self?.updateQuotes()
+                    let newQuote = Quote(id: quote.id, rating: quote.rating - 1, quote: quote.quote, isAlreadyVoted: true)
+                    self?.quotes.remove(at: indexPath.row)
+                    self?.quotes.insert(newQuote, at: indexPath.row)
+                    OperationQueue.main.addOperation {
+                        self?.tableView.reloadData()
+                    }
 				} else {
 					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
 					alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
