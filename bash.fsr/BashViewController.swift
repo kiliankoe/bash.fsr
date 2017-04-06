@@ -139,8 +139,8 @@ class BashViewController: UITableViewController {
                         self?.tableView.reloadData()
                     }
 				} else {
-					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: UIAlertControllerStyle.alert)
-					alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+					let alert = UIAlertController(title: "Nope", message: "Vote failed!", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 					self?.present(alert, animated: true, completion: nil)
 				}
 			})
@@ -150,7 +150,7 @@ class BashViewController: UITableViewController {
 		let downvote = UITableViewRowAction(style: .normal, title: " 👎 ") { [weak self] _, _ in
             guard !quote.isAlreadyVoted else {
                 let alert = UIAlertController(title: "Nope", message: "You already voted this one, chill!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self?.present(alert, animated: true, completion: nil)
                 return
             }
