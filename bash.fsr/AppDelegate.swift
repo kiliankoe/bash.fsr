@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 var pushtoken = "unknown"
 
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		UINavigationBar.appearance().tintColor = UIColor(hex: 0x2C3E50)
+
+        UNUserNotificationCenter.current().delegate = self
 
         let upvoteAction = UIMutableUserNotificationAction()
         upvoteAction.identifier = Vote.up.rawValue
@@ -102,5 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
 //        print("Failed to register:", error)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge])
     }
 }
