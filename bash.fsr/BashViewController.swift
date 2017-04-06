@@ -66,6 +66,19 @@ class BashViewController: UITableViewController {
         }
 	}
 
+    func setQuoteVoted(withId id: Int, andAction action: Vote) {
+        let ratingDiff = action == .up ? 1 : -1
+        let oldQuoteIdx = self.quotes.index { $0.id == id }
+        guard let idx = oldQuoteIdx else { return }
+
+        let oldQuote = self.quotes[idx]
+        let newQuote = Quote(id: id, rating: oldQuote.rating + ratingDiff, quote: oldQuote.quote, isAlreadyVoted: true)
+
+        self.quotes.remove(at: idx)
+        self.quotes.insert(newQuote, at: idx)
+        self.tableView.reloadData()
+    }
+
 	// MARK: - Segues
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,6 +87,7 @@ class BashViewController: UITableViewController {
 		        let quote = quotes[indexPath.row]
 				let dest = segue.destination as? QuoteViewController
 				dest?.quote = quote
+                dest?.bashVC = self
 		    }
 		}
 	}
