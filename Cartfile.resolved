@@ -1,2 +1,3 @@
-github "Alamofire/Alamofire" "4.4.0"
+github "Yalantis/Koloda" "4.0"
+github "facebook/pop" "1.0.9"
 github "honghaoz/Ji" "2.0.1"
