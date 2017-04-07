@@ -44,17 +44,19 @@ class AddQuoteVC: UIViewController {
         self.navigationItem.rightBarButtonItem = self.activityButton
 
 		Bash.addQuote(quote) { [weak self] (success) -> Void in
-			if success {
-				self?.navigationController?.popViewController(animated: true)
-				let appDelegate = UIApplication.shared.delegate as? AppDelegate
-				let mainVC = appDelegate?.window?.rootViewController?.childViewControllers[0] as? BashViewController
-				mainVC?.updateQuotes()
-			} else {
-				let alert = UIAlertController(title: "Nop", message: "Submit failed!", preferredStyle: UIAlertControllerStyle.alert)
-				alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
-				self?.present(alert, animated: true, completion: nil)
-                self?.navigationItem.rightBarButtonItem = self?.doneButton
-			}
+            OperationQueue.main.addOperation {
+                if success {
+                    self?.navigationController?.popViewController(animated: true)
+                    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                    let mainVC = appDelegate?.window?.rootViewController?.childViewControllers[0] as? BashViewController
+                    mainVC?.updateQuotes()
+                } else {
+                    let alert = UIAlertController(title: "Nop", message: "Submit failed!", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                    self?.navigationItem.rightBarButtonItem = self?.doneButton
+                }
+            }
 		}
 	}
 
