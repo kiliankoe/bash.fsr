@@ -16,6 +16,9 @@
 		395C23581BB77F4900DA6CDB /* BashConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C23571BB77F4900DA6CDB /* BashConfig.swift */; };
 		3960C5381BF9FABE00515B9E /* AddQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */; };
 		39724F561E95845A000E7F6D /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39724F551E95845A000E7F6D /* Vote.swift */; };
+		39724F581E96D7B0000E7F6D /* QuoteCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39724F571E96D7B0000E7F6D /* QuoteCardController.swift */; };
+		39724F5A1E96EBDD000E7F6D /* Koloda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39724F591E96EBDD000E7F6D /* Koloda.framework */; };
+		39724F5C1E96ED81000E7F6D /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39724F5B1E96ED81000E7F6D /* pop.framework */; };
 		3976A4B01BFA896A008880E7 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3976A4AF1BFA896A008880E7 /* SwiftColors.swift */; };
 		398DDA4B1BFA312C0057240F /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398DDA4A1BFA312C0057240F /* QuoteCell.swift */; };
 		39DEE16A1BB8B99C00435899 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DEE1691BB8B99C00435899 /* Ji.framework */; };
@@ -35,6 +38,9 @@
 		3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteVC.swift; sourceTree = "<group>"; };
 		39724F541E94D511000E7F6D /* bash.fsr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bash.fsr.entitlements; sourceTree = "<group>"; };
 		39724F551E95845A000E7F6D /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
+		39724F571E96D7B0000E7F6D /* QuoteCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteCardController.swift; sourceTree = "<group>"; };
+		39724F591E96EBDD000E7F6D /* Koloda.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Koloda.framework; path = Carthage/Build/iOS/Koloda.framework; sourceTree = SOURCE_ROOT; };
+		39724F5B1E96ED81000E7F6D /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = Carthage/Build/iOS/pop.framework; sourceTree = SOURCE_ROOT; };
 		3976A4AF1BFA896A008880E7 /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		398DDA4A1BFA312C0057240F /* QuoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		39DEE1691BB8B99C00435899 /* Ji.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ji.framework; path = ../Carthage/Build/iOS/Ji.framework; sourceTree = "<group>"; };
@@ -47,6 +53,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				39DEE16A1BB8B99C00435899 /* Ji.framework in Frameworks */,
+				39724F5A1E96EBDD000E7F6D /* Koloda.framework in Frameworks */,
+				39724F5C1E96ED81000E7F6D /* pop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +87,7 @@
 				39724F551E95845A000E7F6D /* Vote.swift */,
 				395C23261BB77D5000DA6CDB /* BashViewController.swift */,
 				395C23281BB77D5000DA6CDB /* QuoteViewController.swift */,
+				39724F571E96D7B0000E7F6D /* QuoteCardController.swift */,
 				3960C5371BF9FABE00515B9E /* AddQuoteVC.swift */,
 				398DDA4A1BFA312C0057240F /* QuoteCell.swift */,
 				3976A4AF1BFA896A008880E7 /* SwiftColors.swift */,
@@ -102,6 +111,8 @@
 		397F86D81BF9D0C00009BFA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39724F5B1E96ED81000E7F6D /* pop.framework */,
+				39724F591E96EBDD000E7F6D /* Koloda.framework */,
 				39DEE1691BB8B99C00435899 /* Ji.framework */,
 			);
 			name = Frameworks;
@@ -189,6 +200,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Ji.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Koloda.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -206,6 +219,7 @@
 			files = (
 				395C23291BB77D5000DA6CDB /* QuoteViewController.swift in Sources */,
 				3960C5381BF9FABE00515B9E /* AddQuoteVC.swift in Sources */,
+				39724F581E96D7B0000E7F6D /* QuoteCardController.swift in Sources */,
 				395C23271BB77D5000DA6CDB /* BashViewController.swift in Sources */,
 				3976A4B01BFA896A008880E7 /* SwiftColors.swift in Sources */,
 				39DEE16C1BB8BA7000435899 /* Bash.swift in Sources */,
