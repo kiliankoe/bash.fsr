@@ -68,12 +68,12 @@ enum Bash {
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
 
-        let params = ["rash_quote": quote]
-        guard let body = try? JSONSerialization.data(withJSONObject: params) else { // TODO: Check if this works
+        guard let quote = quote.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             completion(false)
             return
         }
-        request.httpBody = body
+        let params = "rash_quote=\(quote)"
+        request.httpBody = params.data(using: .utf8)
 
         URLSession.shared.dataTask(with: request) { _, response, error in
             guard
