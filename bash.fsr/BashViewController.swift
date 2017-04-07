@@ -108,6 +108,14 @@ class BashViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
+
+    // MARK: - Shaking Stuff
+
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if event?.subtype == .motionShake {
+            self.performSegue(withIdentifier: "showCardView", sender: self)
+        }
+    }
 	
 	// MARK: - Swipe Stuff
 	

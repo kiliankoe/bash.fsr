@@ -99,7 +99,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="128.18590704647679"/>
+            <point key="canvasLocation" x="708" y="84"/>
+        </scene>
+        <!--Quote Card Controller-->
+        <scene sceneID="281-ng-UoU">
+            <objects>
+                <viewController id="dCT-06-vZ4" customClass="QuoteCardController" customModule="bash_fsr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HH6-EM-8JU"/>
+                        <viewControllerLayoutGuide type="bottom" id="T5M-4a-B1G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JTO-1i-e6g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32i-D8-FjS" customClass="KolodaView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="32i-D8-FjS" firstAttribute="leading" secondItem="JTO-1i-e6g" secondAttribute="leading" id="9Y8-Zi-hZk"/>
+                            <constraint firstItem="32i-D8-FjS" firstAttribute="top" secondItem="JTO-1i-e6g" secondAttribute="top" id="Lss-1O-Rf1"/>
+                            <constraint firstItem="T5M-4a-B1G" firstAttribute="top" secondItem="32i-D8-FjS" secondAttribute="bottom" id="qcX-Es-D5g"/>
+                            <constraint firstAttribute="trailing" secondItem="32i-D8-FjS" secondAttribute="trailing" id="yP7-Dm-ZVJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sIN-UC-vcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="708" y="-1316.4917541229386"/>
         </scene>
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
@@ -187,6 +217,7 @@
                     <connections>
                         <outlet property="titleButton" destination="l9i-s6-1vi" id="fQK-q7-bhM"/>
                         <segue destination="5Mt-Ef-21f" kind="show" identifier="showAddQuote" id="MwM-S5-zv4"/>
+                        <segue destination="dCT-06-vZ4" kind="show" identifier="showCardView" id="F3v-oa-0og"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
